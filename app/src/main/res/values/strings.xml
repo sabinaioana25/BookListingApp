@@ -3,4 +3,19 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sb_number_of_stars_text">5</string>
+    <string name="sb_btn_read">read</string>
+    <string name="sb_title_text">title</string>
+    <string name="sb_author_text">author</string>
+    <string name="sb_pages_text">pages</string>
+    <string name="sb_rated_by_text">Rated by x people</string>
+    <string name="sb_publisher_text">publisher</string>
+    <string name="sb_btn_buy">buy</string>
+    <string name="sb_btn_preview">preview</string>
+    <string name="sb_snippet_text">Text Snippet:</string>
+    <string name="sb_read_more_text">Read More</string>
+    <string name="sb_about_text">About:</string>
+    <string name="fb_popular_books_text">Popular Books</string>
+    <string name="nb_new_release_text">New releases</string>
+    <string name="lib_my_library_text">My Library</string>
 </resources>

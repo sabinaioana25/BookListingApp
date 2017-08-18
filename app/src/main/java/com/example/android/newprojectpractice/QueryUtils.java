@@ -1,5 +1,8 @@
 package com.example.android.newprojectpractice;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -26,18 +29,13 @@ public class QueryUtils {
 
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
 
+
     private QueryUtils() {
     }
 
     public static List<Book> fetchBookData(String requestUrl) {
         Log.i(LOG_TAG, "Test fetchBookData() is called");
         URL url = createUrl(requestUrl);
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         String jsonResponse = null;
         try {
@@ -84,7 +82,7 @@ public class QueryUtils {
             }
 
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON result.", e);
+            Log.e(LOG_TAG, "Problem retrieving the book JSON result.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -110,11 +108,32 @@ public class QueryUtils {
         return output.toString();
     }
 
+    private static Bitmap bmp = null;
+    private static Bitmap bmp2 = null;
+    private static String title;
+    private static String buyBookLink;
+    private static String webReadLink;
+    private static String bookTextSnippet;
+    private static String authorName;
+    private static JSONArray author;
+    private static String bookPublisher;
+    private static String publishDate;
+    private static int pageCount;
+    private static String smallImageLink;
+    private static String largeImageLink;
+    private static int averageRating;
+    private static String previewLink;
+    private static int ratingsCount;
+    private static String description;
+
+//    private static double averageRating;
+
     public static List<Book> extractFeatureFromJson(String bookJSON) {
         if (TextUtils.isEmpty(bookJSON)) {
             return null;
         }
-        List<Book> books; books = new ArrayList<>();
+        List<Book> books;
+        books = new ArrayList<>();
 
         try {
             JSONObject baseJsonResponse = new JSONObject(bookJSON);
@@ -123,14 +142,77 @@ public class QueryUtils {
             for (int i = 0; i < bookArray.length(); i++) {
                 JSONObject currentBook = bookArray.getJSONObject(i);
                 JSONObject volumeInfo = currentBook.getJSONObject("volumeInfo");
+                JSONObject accessInfo = currentBook.getJSONObject("accessInfo");
+                JSONObject searchInfo = currentBook.getJSONObject("searchInfo");
 
-                String title = volumeInfo.getString("title");
-//                String author = volumeInfo.getString("author");
-//
-//                String publishDate = volumeInfo.getString("publishedDate");
-//                double averageRating = volumeInfo.getDouble("averageRating");
+                title = volumeInfo.getString("title");
 
-                Book book = new Book(title);
+                if (searchInfo.has("textSnippet")) {
+                    bookTextSnippet = searchInfo.getString("textSnippet");
+                } else {
+                    break;
+                }
+
+                if (volumeInfo.has("authors")) {
+                    author = volumeInfo.getJSONArray("authors");
+                    authorName = author.getString(0);
+                }
+
+                if (volumeInfo.has("publisher")) {
+                    bookPublisher = volumeInfo.getString("publisher");
+                }
+
+                if (volumeInfo.has("description")) {
+                    description = volumeInfo.getString("description");
+                }
+
+                if (volumeInfo.has("publishedDate")) {
+                    publishDate = volumeInfo.getString("publishedDate");
+                }
+
+                if (volumeInfo.has("previewLink")) {
+                    previewLink = volumeInfo.getString("previewLink");
+                }
+
+                if (accessInfo.has("webReaderLink")) {
+                    webReadLink = accessInfo.getString("webReaderLink");
+                }
+
+                if (volumeInfo.has("infoLink")) {
+                    buyBookLink = volumeInfo.getString("infoLink");
+                }
+
+                if (volumeInfo.has("averageRating")) {
+                    averageRating = volumeInfo.getInt("averageRating");
+                }
+
+                if (volumeInfo.has("pageCount")) {
+                    pageCount = volumeInfo.getInt("pageCount");
+                }
+
+                if (volumeInfo.has("ratingsCount")) {
+                    ratingsCount = volumeInfo.getInt("ratingsCount");
+                }
+                if (volumeInfo.has("imageLinks")) {
+                    JSONObject image = volumeInfo.getJSONObject("imageLinks");
+                    smallImageLink = image.getString("smallThumbnail");
+                    largeImageLink = image.getString("thumbnail");
+                    try {
+                        URL url = new URL(smallImageLink);
+                        URL url2 = new URL(largeImageLink);
+                        bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                        bmp2 = BitmapFactory.decodeStream(url2.openConnection().getInputStream());
+                    } catch (MalformedURLException e) {
+
+                    } catch (IOException e) {
+                    }
+                } else {
+                    bmp = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.no_image_available_s_large);
+                    bmp2 = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.no_image_available_s_large);
+                }
+
+                Book book = new Book(bmp, bmp2, title, pageCount, authorName, publishDate, averageRating, previewLink,
+                        bookTextSnippet, ratingsCount, description, bookPublisher, webReadLink, buyBookLink);
                 books.add(book);
             }
         } catch (JSONException e) {

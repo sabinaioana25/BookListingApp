@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/my_library_books"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fb_text_viewmargin"
+        android:padding="@dimen/fb_text_view_padding"
+        android:text="@string/lib_my_library_text"
+        android:textSize="@dimen/sb_text_size" />
+
+    <GridView
+        android:id="@+id/library_grid_view_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/my_library_books"
+        android:contextClickable="true"
+        android:fitsSystemWindows="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:horizontalSpacing="@dimen/fb_horizontal_spacing"
+        android:numColumns="2"
+        android:orientation="horizontal"
+        android:padding="@dimen/fb_text_view_padding"
+        android:verticalSpacing="@dimen/fb_vertical_spacing" />
+
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <!-- Loading indicator is only shown before the first load -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+</RelativeLayout>

@@ -21,30 +21,24 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new BlankFragment();
+                return new FeaturedBookFragment();
             case 1:
                 return new NewBookFragment();
             case 2:
                 return new MyLibraryFragment();
+            case 3:
+                return new SearchBookFragment();
         }
         return null;
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position) {
-            case 0:
-                return "Relevant Books";
-            case 1:
-                return "New Releases";
-            case 2:
-                return "My Library";
-        }
-        return super.getPageTitle(position);
+            return " ";
     }
 }

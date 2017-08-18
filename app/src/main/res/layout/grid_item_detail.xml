@@ -1,36 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/book_image"
-        android:layout_width="100dp"
-        android:layout_height="160dp"
-        android:src="@drawable/life_of_pi" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/book_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="hello" />
+        <ImageView
+            android:id="@+id/book_image"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:adjustViewBounds="true"
+            android:cropToPadding="true"
+            android:gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/life_of_pi" />
 
-    <TextView
-        android:id="@+id/book_author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="goodbye" />
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@id/book_image"-->
+            <!--android:foregroundGravity="center"-->
+            <!--android:minHeight="100dp"-->
+            <!--android:orientation="vertical">-->
 
-    <TextView
-        android:id="@+id/book_publish_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="publish date" />
+            <!--<TextView-->
+                <!--android:id="@+id/book_title"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_below="@+id/book_image"-->
+                <!--android:maxLines="1"-->
+                <!--android:text="hello" />-->
 
-    <TextView
-        android:id="@+id/average_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="average rating" />
+            <!--<TextView-->
+                <!--android:id="@+id/book_author"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:maxLines="1"-->
+
+                <!--android:text="goodbye" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/book_page_count"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:maxLines="1"-->
+                <!--android:text="pageCount" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/book_publish_date"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:maxLines="1"-->
+                <!--android:text="publish date" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/book_average_rating"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:maxLines="1"-->
+                <!--android:text="average rating" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/book_ratings_count"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:maxLines="1"-->
+                <!--android:text="rating count" />-->
+        <!--</LinearLayout>-->
+    </RelativeLayout>
 </LinearLayout>

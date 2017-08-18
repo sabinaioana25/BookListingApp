@@ -1,6 +1,5 @@
 package com.example.android.newprojectpractice;
 
-
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -19,23 +18,21 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewBookFragment extends Fragment implements
+public class FeaturedBookFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<List<Book>> {
 
-    private static final String LOG_TAG = NewBookFragment.class.getName();
+    private static final String LOG_TAG = FeaturedBookFragment.class.getName();
     public static final String GB_REQUEST_URL =
-            "https://www.googleapis.com/books/v1/volumes?q=roman+empire&orderBy=relevance";
+            "https://www.googleapis.com/books/v1/volumes?q=earth&orderBy=relevance";
     private static final int BOOK_LOADER_ID = 1;
     public BookAdapter bookAdapter;
     private TextView emptyStateView;
     private ProgressBar progressBar;
 
-
-    public NewBookFragment() {
+    public FeaturedBookFragment() {
         // Required empty public constructor
     }
 
@@ -43,8 +40,8 @@ public class NewBookFragment extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_new_book, container, false);
-        final GridView listGrid = (GridView) rootView.findViewById(R.id.new_grid_view_list);
+        View rootView = inflater.inflate(R.layout.fragment_featured_book, container, false);
+        final GridView listGrid = (GridView) rootView.findViewById(R.id.featured_grid_view_list);
         bookAdapter = new BookAdapter(getActivity(), new ArrayList<Book>());
         listGrid.setAdapter(bookAdapter);
 
@@ -60,7 +57,7 @@ public class NewBookFragment extends Fragment implements
             progressBar.setVisibility(View.GONE);
             emptyStateView.setText("There is not internet connection");
         }
-//        getLoaderManager().initLoader(BOOK_LOADER_ID, null, this).forceLoad();
+
         return rootView;
     }
 
@@ -71,7 +68,7 @@ public class NewBookFragment extends Fragment implements
     }
 
     @Override
-    public Loader<List<Book>> onCreateLoader(int id, Bundle bundle) {
+    public Loader<List<Book>> onCreateLoader(int i, Bundle bundle) {
         Log.e(LOG_TAG, "Test PopularBookFragment() is called");
         return new BookLoader(getActivity(), GB_REQUEST_URL);
     }
@@ -81,6 +78,7 @@ public class NewBookFragment extends Fragment implements
         Log.e(LOG_TAG, "Test PopularBookFragment() is called");
         emptyStateView.setText("No books found");
         progressBar.setVisibility(View.GONE);
+
         if (books != null && !books.isEmpty()) {
             bookAdapter.addAll(books);
         }
@@ -91,4 +89,6 @@ public class NewBookFragment extends Fragment implements
         Log.e(LOG_TAG, "Test Activity onLoaderReset() is called");
         bookAdapter.clear();
     }
+
+
 }
