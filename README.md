@@ -3,7 +3,7 @@ The goal is to design and create the structure of a Book Listing app which would
 Project book listing. This is the seventh project completed for the Android Basics Nanodegree program offered by Udacity in collaboration with Google. 
 This is a proposed design for the Android app.
 
-![](MainActivity.png) ![](DetailActivity.png)
+![](MainActivityPopular.png) ![](DetailActivity.png)
 ![](MainActivitySearch.png)
 
 # Pre-requisites
